@@ -1,4 +1,4 @@
-export default class Person {
+class Person {
     constructor(age, social, issues) {
         this.age = age;
         this.social = social;
@@ -7,3 +7,4 @@ export default class Person {
     
 };
 
+module.exports = Person;
