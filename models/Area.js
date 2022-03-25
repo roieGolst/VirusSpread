@@ -22,7 +22,10 @@ class Area {
         }
     }
 
-    
+    placeAperson(person, x, y) {
+        this.#areaArray[x][y].push(person); 
+        console.table(this.#areaArray);
+    }
 
 }
 
