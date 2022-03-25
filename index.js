@@ -1,7 +1,7 @@
 const Person =  require("./models/Person");
-const Area = require("./models/Place");
+const Area = require("./models/Area");
 const Virus = require("./models/Virus");
 
-let yakir = new Area(19, 1, 5);
+let lsa = new Area(19, 1, 6);
 
-console.log(yakir);
+
