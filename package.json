@@ -1,0 +1,23 @@
+{
+  "name": "virusspread",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theFunkegamer/VirusSpread.git"
+  },
+  "keywords": [
+    "Virus",
+    "epidemic"
+  ],
+  "author": "TGB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theFunkegamer/VirusSpread/issues"
+  },
+  "homepage": "https://github.com/theFunkegamer/VirusSpread#readme"
+}
