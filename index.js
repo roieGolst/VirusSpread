@@ -8,14 +8,7 @@ let roie = new Person(20, 1, []);
 let yoni = new Person(30, 0.8, []);
 let yakir =  new Person(5, 0.4, []);
 
-
-let map = new Map();
-
-map.set("roie", roie);
-map.set("yoni", yoni);
-map.set("yakir", yakir);
-
-map.delete("yoni")
+console.log(roie);
 // for(let i = 0; i < 10; i++){
 //     lsa.placeAperson(
 //         roie, 
