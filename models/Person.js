@@ -1,14 +1,18 @@
+const uuid = require("uuid");
 class Person {
-
-    #uuid
-
     constructor(age, social, issues, place) {
-        this.#uuid = require("uuid");
-        this.id = this.#uuid.v1();
+        this.x; 
+        this.y; 
+        this.id = uuid.v1()
         this.age = age;
         this.social = social;
         this.healthIssues = issues;
         this.place = place;
+    }
+
+    saveLocation(poss) {
+        this.x = poss.x;
+        this.y = poss.y;    
     }
 }
 
