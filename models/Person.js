@@ -12,8 +12,21 @@ class Person {
         };
     }
 
-    saveLocation(poss) {
-        this.currentPosition = poss;
+    move() {
+        const newPosition = this.currentPosition.area.movePerson(this);
+        this.currentPosition = newPosition;
+    }
+
+    jumpToArea(area) {
+        if(currentPosition.area) {
+            this.currentPosition.area.removePerson(person);
+        }
+
+        this.currentPosition = area.addPerson(this);
+    }
+
+    updatePosition(position) {
+        this.currentPosition = position;
     }
 }
 

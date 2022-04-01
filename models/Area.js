@@ -2,10 +2,9 @@ class Area {
     
     #areaArray
 
-    constructor(dimenssions, popularity, maxTicks) {        
+    constructor(dimenssions, popularity) {        
         this.dimenssions = dimenssions;
         this.popularity = popularity;
-        this.maxTicks = maxTicks;
 
         this.#createArray();
     }
@@ -22,29 +21,41 @@ class Area {
         }
     }
 
-    placeAperson(person, x, y) {
-        console.log(`x =  ${x} y = ${y} dimenssions = ${this.dimenssions}`);
+    addPerson(person) {
+        let x = Math.floor(Math.random() * this.dimenssions);
+        let y = Math.floor(Math.random() * this.dimenssions)
 
-        if(x < 0 || x >= this.dimenssions) {
-            this.movePerson(person);
-            return;
-        }
-
-        if(y < 0 || y >= this.dimenssions) {
-            this.movePerson(person);
-            return;
-        }
         this.#areaArray[y][x].set(person.id, person);
-        console.table(this.#areaArray);
+        
+        return {x, y, area: this};
+    }
 
-        person.saveLocation({x, y, area: this});
-        // console.log(person);
+    removePerson(person){
+        this.#areaArray[person.currentPosition.y][person.currentPosition.x].delete(person.id);
+    }
+
+    placeAperson(person, x, y) {
+        // console.log(`x =  ${x} y = ${y} dimenssions = ${this.dimenssions}`);
+
+        // if(x < 0 || x >= this.dimenssions) {
+        //     this.movePerson(person);
+        //     return;
+        // }
+
+        // if(y < 0 || y >= this.dimenssions) {
+        //     this.movePerson(person);
+        //     return;
+        // }
+        // this.#areaArray[y][x].set(person.id, person);
+        // console.table(this.#areaArray);
+
+        return {x, y, area: this};
     }
 
     movePerson(person) {
         this.#areaArray[person.currentPosition.y][person.currentPosition.x].delete(person.id);
 
-        if(Math.floor(Math.random() * 2)) {
+        if(Math.random() < 0.3) {
             if(Math.floor(Math.random() * 2)) {
                 this.placeAperson(
                     person,
