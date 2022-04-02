@@ -22,6 +22,6 @@ pepole[0].jumpToArea(lsa);
 pepole[0].jumpToArea(tl);
 
 
-for(let i = 0; i < 15; i++) {
+for(let i = 0; i < 30; i++) {
     pepole[0].move();
 }

@@ -41,6 +41,9 @@ class Person {
            this.direction.y = this.#randomDirection();
            
            this.direction.ticksCounter = MAX_TICKS_PER_DIRECTION * this.lonelyRate;
+
+           console.log("new direction");
+           console.log(`d.x: ${this.direction.x}, d.y: ${this.direction.y}`);
        }
 
        this.currentPosition.area.removePerson(this);
@@ -51,11 +54,16 @@ class Person {
         if(this.currentPosition.x < 0 || this.currentPosition.x > this.currentPosition.area.size) {
             this.direction.x *= -1;
             this.currentPosition.x += this.direction.x;
+            
+            console.log(`x out of range ${this.currentPosition.x}`);
         }
 
         if(this.currentPosition.y < 0 || this.currentPosition.y > this.currentPosition.area.size) {
             this.direction.y *= -1;
             this.currentPosition.y += this.direction.y;
+
+            console.log(`y out of range ${this.currentPosition.y}`);
+
         }
 
         this.movementInterval = MAX_MOVMENT_INTERVAL * this.lonelyRate;
