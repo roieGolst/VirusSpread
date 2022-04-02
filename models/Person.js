@@ -23,23 +23,24 @@ class Person {
     }
     
     jumpToArea(area) {
-        if(currentPosition.area) {
-            this.currentPosition.area.removePerson(person);
+        if(this.currentPosition.area) {
+            this.currentPosition.area.removePerson(this);
         }
 
         this.currentPosition = area.addPerson(this);
     }
     
     move() {
-       if(!this.movementInterval--) {
+       if(this.movementInterval--) {
+           console.log(`Skip movment interval: ${this.movementInterval}`);
             return;
        }
 
        if(!this.direction.ticksCounter--) {
-           this.direction.x = this.#randomDirection;
-           this.direction.y = this.#randomDirection;
-            
-            this.direction.ticksCounter = MAX_TICKS_PER_DIRECTION * this.lonelyRate;
+           this.direction.x = this.#randomDirection();
+           this.direction.y = this.#randomDirection();
+           
+           this.direction.ticksCounter = MAX_TICKS_PER_DIRECTION * this.lonelyRate;
        }
 
        this.currentPosition.area.removePerson(this);
@@ -48,17 +49,17 @@ class Person {
        this.currentPosition.y += this.direction.y;
 
         if(this.currentPosition.x < 0 || this.currentPosition.x > this.currentPosition.area.size) {
-            this.direction.x *= --1;
+            this.direction.x *= -1;
             this.currentPosition.x += this.direction.x;
         }
 
         if(this.currentPosition.y < 0 || this.currentPosition.y > this.currentPosition.area.size) {
-            this.direction.y *= --1;
+            this.direction.y *= -1;
             this.currentPosition.y += this.direction.y;
         }
 
         this.movementInterval = MAX_MOVMENT_INTERVAL * this.lonelyRate;
-
+        
         this.currentPosition.area.placePerson(
             this,
             this.currentPosition.x,
@@ -78,6 +79,7 @@ class Person {
 
         return 1;
     }
+
 }
 
 module.exports = Person;

@@ -37,6 +37,7 @@ class Area {
 
     placePerson(person, x, y){
         this.#areaArray[y][x].set(person.id, person);
+        console.table(this.#areaArray);
     }
 }
 

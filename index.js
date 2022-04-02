@@ -2,11 +2,11 @@ const Person =  require("./models/Person");
 const Area = require("./models/Area");
 const Virus = require("./models/Virus");
 
-let lsa = new Area(7, 1, 6);
-let tl = new Area(7, 1, 6);
+let lsa = new Area(7, 1);
+let tl = new Area(5, 1);
 
 const pepole = [
-    new Person(20, 1, [])
+    new Person(20, 0.2, [])
 ];
 
 // console.log(roie);
@@ -18,10 +18,10 @@ const pepole = [
 //     );
 // }
 
-roie.jumpToArea(pepole);
-roie.jumpToArea(tl);
+pepole[0].jumpToArea(lsa);
+pepole[0].jumpToArea(tl);
 
 
-for(let i = 0; i < pepole.length; i++) {
-    pepole[i].move();
+for(let i = 0; i < 15; i++) {
+    pepole[0].move();
 }
