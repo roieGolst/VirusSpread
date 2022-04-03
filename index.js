@@ -1,14 +1,20 @@
 const Person =  require("./models/Person");
 const Area = require("./models/Area");
 const Virus = require("./models/Virus");
+const Utils = require("./utils");
 
-let lsa = new Area(7, 1);
-let tl = new Area(5, 1);
+let tlv = new Area(10);
 
-const pepole = [
-    new Person(20, 0.2, [])
-];
+let corona = new Virus("Corona" , 0.2, 0.1);
 
+const pepole = [];
+
+for(let i = 0; i < 10; i++) {
+    const person = Utils.personUtils.createPerson();
+    person.jumpToArea(tlv);
+    Utils.virusUtils.getInfected(person, corona);
+    pepole.push(person);
+}
 // console.log(roie);
 // for(let i = 0; i < 10; i++){
 //     lsa.placeAperson(
@@ -17,11 +23,9 @@ const pepole = [
 //         Math.floor(Math.random() * lsa.dimenssions)
 //     );
 // }
-
-pepole[0].jumpToArea(lsa);
-pepole[0].jumpToArea(tl);
-
-
-for(let i = 0; i < 30; i++) {
-    pepole[0].move();
-}
+// for(let i = 0; i < 30; i++){
+//     for(let j = 0; j < pepole.length; j++) {
+//         pepole[j].move();
+//     }
+//     console.table(tlv.getAreaArray());
+// }

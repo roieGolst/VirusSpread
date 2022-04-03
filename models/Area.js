@@ -2,9 +2,8 @@ class Area {
     
     #areaArray
 
-    constructor(dimenssions, popularity) {        
+    constructor(dimenssions) {        
         this.dimenssions = dimenssions;
-        this.popularity = popularity;
         this.size = this.dimenssions - 1;
 
         this.#createArray();
@@ -37,7 +36,10 @@ class Area {
 
     placePerson(person, x, y){
         this.#areaArray[y][x].set(person.id, person);
-        console.table(this.#areaArray);
+    }
+
+    getAreaArray() {
+        return this.#areaArray;
     }
 }
 
