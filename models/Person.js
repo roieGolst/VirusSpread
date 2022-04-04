@@ -9,7 +9,7 @@ class Person {
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
         this.movementInterval = 0;
-        this.infection = infection
+        this.infection = infection;
         this.direction = {
             x: undefined,
             y: undefined,
@@ -21,7 +21,7 @@ class Person {
             y: undefined,
             area: undefined
         };
-        console.log(this);
+        // console.log(this);
     }
 
     jumpToArea(area) {
@@ -34,7 +34,7 @@ class Person {
     
     move() {
        if(this.movementInterval--) {
-           console.log(`id: ${this.id}, Skip movment interval: ${this.movementInterval}`);
+        //    console.log(`id: ${this.id}, Skip movment interval: ${this.movementInterval}`);
             return;
        }
 
@@ -44,8 +44,8 @@ class Person {
            
            this.direction.ticksCounter = MAX_TICKS_PER_DIRECTION * this.dynamicRate;
 
-           console.log("new direction");
-           console.log(`id: ${this.id}, d.x: ${this.direction.x}, d.y: ${this.direction.y}`);
+        //    console.log("new direction");
+        //    console.log(`id: ${this.id}, d.x: ${this.direction.x}, d.y: ${this.direction.y}`);
        }
 
        this.currentPosition.area.removePerson(this);
@@ -57,14 +57,14 @@ class Person {
             this.direction.x *= -1;
             this.currentPosition.x += this.direction.x;
             
-            console.log(`id: ${this.id}, x out of range ${this.currentPosition.x}`);
+            // console.log(`id: ${this.id}, x out of range ${this.currentPosition.x}`);
         }
 
         if(this.currentPosition.y < 0 || this.currentPosition.y > this.currentPosition.area.size) {
             this.direction.y *= -1;
             this.currentPosition.y += this.direction.y;
 
-            console.log(`id: ${this.id}, y out of range ${this.currentPosition.y}`);
+            // console.log(`id: ${this.id}, y out of range ${this.currentPosition.y}`);
 
         }
 
@@ -88,6 +88,15 @@ class Person {
         }
 
         return 1;
+    }
+
+    infect(virus) {
+        // Formula
+        const formulaResult = Math.random();
+        
+        if(formulaResult > 0.97) {
+            this.infection = virus;
+        }
     }
 
 }

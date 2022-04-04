@@ -36,6 +36,13 @@ class Area {
 
     placePerson(person, x, y){
         this.#areaArray[y][x].set(person.id, person);
+
+        if(person.infection) {
+            // console.log(`infecting ${person.id}, x: ${x}, y: ${y}`);
+            for(let anotherPerson of this.#areaArray[y][x].values()) {
+                anotherPerson.infect(person.infection);
+            }
+        }
     }
 
     getAreaArray() {

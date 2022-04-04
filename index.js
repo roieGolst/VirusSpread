@@ -1,31 +1,31 @@
 const Person =  require("./models/Person");
 const Area = require("./models/Area");
 const Virus = require("./models/Virus");
-const Utils = require("./utils");
+const personUtils = require("./utils/personUtils");
 
-let tlv = new Area(10);
+let tlv = new Area(7);
 
 let corona = new Virus("Corona" , 0.2, 0.1);
 
 const pepole = [];
 
+let manyak = personUtils.createPerson(corona);
+manyak.jumpToArea(tlv);
+pepole.push(manyak);
+
 for(let i = 0; i < 10; i++) {
-    const person = Utils.personUtils.createPerson();
+    const person = personUtils.createPerson();
     person.jumpToArea(tlv);
-    Utils.virusUtils.getInfected(person, corona);
     pepole.push(person);
 }
-// console.log(roie);
-// for(let i = 0; i < 10; i++){
-//     lsa.placeAperson(
-//         roie, 
-//         Math.floor(Math.random() * lsa.dimenssions), 
-//         Math.floor(Math.random() * lsa.dimenssions)
-//     );
+
+// for(let j = 0; j < 15; j++) {
+    
 // }
-// for(let i = 0; i < 30; i++){
-//     for(let j = 0; j < pepole.length; j++) {
-//         pepole[j].move();
-//     }
-//     console.table(tlv.getAreaArray());
-// }
+
+setInterval(() => {
+    for(let k = 0; k < pepole.length; k++) {
+        pepole[k].move();
+    }
+    console.table(tlv.getAreaArray());
+}, 200);
