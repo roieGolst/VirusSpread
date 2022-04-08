@@ -92,10 +92,11 @@ class Person {
 
     infect(virus) {
         // Formula
-        const formulaResult = Math.random();
+        const formulaResult = ((this.dynamicRate * (this.age + this.healthIssues) / 1) / virus.transmissionRate) * Math.random();
         
-        if(formulaResult > 0.97) {
+        if(formulaResult > virus.transmissionRate) {
             this.infection = virus;
+            // console.log(formulaResult);
         }
     }
 
