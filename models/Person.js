@@ -5,7 +5,7 @@ const MAX_MOVMENT_INTERVAL = 10;
 class Person {
     constructor(age, dynamicRate, issues, infection) { 
         this.id = uuid.v1();
-        this.age = age;
+        this.age = age / 100;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
         this.movementInterval = 0;
@@ -42,7 +42,7 @@ class Person {
            this.direction.x = this.#randomDirection();
            this.direction.y = this.#randomDirection();
            
-           this.direction.ticksCounter = MAX_TICKS_PER_DIRECTION * this.dynamicRate;
+           this.direction.ticksCounter = ~~(MAX_TICKS_PER_DIRECTION * this.dynamicRate);
 
         //    console.log("new direction");
         //    console.log(`id: ${this.id}, d.x: ${this.direction.x}, d.y: ${this.direction.y}`);
@@ -68,7 +68,7 @@ class Person {
 
         }
 
-        this.movementInterval = MAX_MOVMENT_INTERVAL * this.dynamicRate;
+        this.movementInterval = ~~(MAX_MOVMENT_INTERVAL * this.dynamicRate);
         
         this.currentPosition.area.placePerson(
             this,
@@ -90,13 +90,15 @@ class Person {
         return 1;
     }
 
-    infect(virus) {
+    infect(virus, distance, person) {
         // Formula
-        const formulaResult = ((this.dynamicRate * (this.age + this.healthIssues) / 1) / virus.transmissionRate) * Math.random();
+        const formulaResult =(1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
         if(formulaResult > virus.transmissionRate) {
             this.infection = virus;
-            // console.log(formulaResult);
+            console.log(this, "Is infected by ", person);
+            //console.log(`person: ${this} infected by ${person}`);
+            throw new Error(`${this.id} is also manyak`);
         }
     }
 
