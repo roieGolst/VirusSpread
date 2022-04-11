@@ -68,7 +68,7 @@ class Person {
 
         }
 
-        this.movementInterval = ~~(MAX_MOVMENT_INTERVAL * this.dynamicRate);
+        this.movementInterval = ~~(MAX_MOVMENT_INTERVAL * (1 - this.dynamicRate));
         
         this.currentPosition.area.placePerson(
             this,
@@ -92,7 +92,7 @@ class Person {
 
     infect(virus, distance, person) {
         // Formula
-        const formulaResult =(1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        const formulaResult = (1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
         if(formulaResult > virus.transmissionRate) {
             this.infection = virus;
