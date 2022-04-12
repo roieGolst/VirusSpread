@@ -8,7 +8,7 @@ class Person {
         this.age = age / 100;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
-        this.healthPoints = 10;
+        this.healthPoints = 100;
         this.movementInterval = 0;
         this.infection = infection;
         this.direction = {

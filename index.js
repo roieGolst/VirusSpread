@@ -21,7 +21,7 @@ for(let i = 0; i < 4; i++) {
 
 setInterval(() => {
     for(let k = 0; k < pepole.length; k++) {
-        pepole[0].move();
+        pepole[k].move();
     }
     console.table(tlv.getAreaArray());
 }, 50);``
