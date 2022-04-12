@@ -40,8 +40,9 @@ class Area {
             for(let anotherPerson of this.#areaArray[y][x].values()) {
                 anotherPerson.infect(person.infection, 1, person);
             }
-        }
 
+            person.killing();
+        }
         this.#areaArray[y][x].set(person.id, person);
     }
 

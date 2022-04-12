@@ -5,7 +5,7 @@ const personUtils = require("./utils/personUtils");
 
 let tlv = new Area(7);
 
-let corona = new Virus("Corona" , 0.1, 0.1);
+let corona = new Virus("Corona" , 0.1, 0.9);
 
 const pepole = [];
 
@@ -21,7 +21,7 @@ for(let i = 0; i < 4; i++) {
 
 setInterval(() => {
     for(let k = 0; k < pepole.length; k++) {
-        pepole[k].move();
+        pepole[0].move();
     }
     console.table(tlv.getAreaArray());
-}, 200);
+}, 50);``

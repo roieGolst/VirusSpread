@@ -8,6 +8,7 @@ class Person {
         this.age = age / 100;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
+        this.healthPoints = 10;
         this.movementInterval = 0;
         this.infection = infection;
         this.direction = {
@@ -92,14 +93,26 @@ class Person {
 
     infect(virus, distance, person) {
         // Formula
-        const formulaResult = (1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        const infectFormulaResult = (1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
-        if(formulaResult > virus.transmissionRate) {
+        if(infectFormulaResult > virus.transmissionRate) {
             this.infection = virus;
-            console.log(this, "Is infected by ", person);
+            // console.log(this, "Is infected by ", person);
             //console.log(`person: ${this} infected by ${person}`);
-            throw new Error(`${this.id} is also manyak`);
+            // throw new Error(`${this.id} is also manyak`);
         }
+    }
+
+    killing() {
+        const deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues)) * 10;
+        
+        if(this.healthPoints < 0){
+            this.currentPosition.area.removePerson(this);
+            console.log(this, "manyak");
+            throw new Error("is dead");
+        }
+
+        this.healthPoints -= deathFormulaResult;
     }
 
 }
