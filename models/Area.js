@@ -37,15 +37,34 @@ class Area {
     placePerson(person, x, y){
         if(person.infection) {
             // console.log(`infecting ${person.id}, x: ${x}, y: ${y}`);
-            for(let anotherPerson of this.#areaArray[y][x].values()) {
-                anotherPerson.infect(person.infection, 1, person);
-            }
+            // for(let anotherPerson of this.#areaArray[y][x].values()) {
+            //     anotherPerson.infect(person.infection, 1, person);
+            // }
+            this.getPersonByRadius(person);
 
             person.killing();
         }
         this.#areaArray[y][x].set(person.id, person);
     }
 
+    getPersonByRadius(person){
+            let x, y, d, yDiff, threshold, radiusSq, radius;
+            radius = person.infection.maxInfectRadius;
+            radiusSq = (radius * radius) / 4;
+            for(y = 0; y < this.dimenssions; y++) {
+                yDiff = y - person.currentPosition.y;
+                threshold = radiusSq - (yDiff * yDiff);
+                for(x = 0; x < this.dimenssions; x++) {
+                    d = x - person.currentPosition.x;
+
+                    if (((d * d) < threshold)) {
+                        for(let anotherPerson of this.#areaArray[y][x]){
+                            anotherPerson.infect(person.infection, radius);
+                        }
+                    }
+                }
+            }
+        }
     getAreaArray() {
         return this.#areaArray;
     }

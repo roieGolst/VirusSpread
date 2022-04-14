@@ -91,9 +91,9 @@ class Person {
         return 1;
     }
 
-    infect(virus, distance, person) {
+    infect(virus, radius, person) {
         // Formula
-        const infectFormulaResult = (1 + (distance * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        const infectFormulaResult = (1 + (radius * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
         if(infectFormulaResult > virus.transmissionRate) {
             this.infection = virus;
