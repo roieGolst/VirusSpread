@@ -1,6 +1,7 @@
 const uuid = require("uuid");
 const MAX_TICKS_PER_DIRECTION = 10;
 const MAX_MOVMENT_INTERVAL = 10;
+const MAX_HEALTH_POINTS = 10;
 
 class Person {
     constructor(age, dynamicRate, issues, infection) { 
@@ -8,21 +9,26 @@ class Person {
         this.age = age / 100;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
-        this.healthPoints = 100;
+        this.healthPoints = MAX_HEALTH_POINTS;
         this.movementInterval = 0;
         this.infection = infection;
+        this.deathFormulaResult = 0;
         this.direction = {
             x: undefined,
             y: undefined,
             ticksCounter: 0
         };
 
+        this.#resetCurrentPosition();
+        // console.log(this);
+    }
+
+    #resetCurrentPosition() {
         this.currentPosition = {
             x: undefined,
             y: undefined,
             area: undefined
         };
-        // console.log(this);
     }
 
     jumpToArea(area) {
@@ -33,7 +39,7 @@ class Person {
         this.currentPosition = area.addPerson(this);
     }
     
-    move() {
+    #move() {
        if(this.movementInterval--) {
         //    console.log(`id: ${this.id}, Skip movment interval: ${this.movementInterval}`);
             return;
@@ -78,6 +84,18 @@ class Person {
         );
     }
 
+    iteration() {
+        if(!currentPosition.area) {
+            return;
+        }
+
+        this.#move();
+
+        if(this.infection) {
+            this.#killing();
+        }
+    }
+
     #randomDirection() {
         const random = Math.random();
             
@@ -91,28 +109,29 @@ class Person {
         return 1;
     }
 
-    infect(virus, radius, person) {
+    infect(person, distance) {
         // Formula
-        const infectFormulaResult = (1 + (radius * virus.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
-        if(infectFormulaResult > virus.transmissionRate) {
-            this.infection = virus;
+        if(infectFormulaResult > person.infection.transmissionRate) {
+            this.infection = person.infection;
+            this.deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues));
             // console.log(this, "Is infected by ", person);
-            //console.log(`person: ${this} infected by ${person}`);
-            // throw new Error(`${this.id} is also manyak`);
+            console.log(person, "infect");
+            console.log(`person: ${this}`);
         }
+        
     }
 
-    killing() {
-        const deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues)) * 10;
-        
+    #killing() {
+        this.healthPoints -= this.deathFormulaResult;
+
         if(this.healthPoints < 0){
             this.currentPosition.area.removePerson(this);
+            this.#resetCurrentPosition();
             console.log(this, "manyak");
             throw new Error("is dead");
-        }
-
-        this.healthPoints -= deathFormulaResult;
+        }       
     }
 
 }

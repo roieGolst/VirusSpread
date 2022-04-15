@@ -3,9 +3,9 @@ const Area = require("./models/Area");
 const Virus = require("./models/Virus");
 const personUtils = require("./utils/personUtils");
 
-let tlv = new Area(7);
+let tlv = new Area(5);
 
-let corona = new Virus("Corona" , 0.7, 0.2);
+let corona = new Virus("Corona" , 0.7, 0.2, 1);
 
 const pepole = [];
 
@@ -21,7 +21,7 @@ for(let i = 0; i < 4; i++) {
 
 setInterval(() => {
     for(let k = 0; k < pepole.length; k++) {
-        pepole[k].move();
+        pepole[k].iteration();
     }
-    // console.table(tlv.getAreaArray());
-}, 50);``
+    console.table(tlv.getAreaArray());
+}, 50);
