@@ -85,7 +85,7 @@ class Person {
     }
 
     iteration() {
-        if(!currentPosition.area) {
+        if(!this.currentPosition.area) {
             return;
         }
 

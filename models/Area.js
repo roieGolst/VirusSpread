@@ -39,7 +39,6 @@ class Area {
             console.log(`infecting ${person.id}, x: ${x}, y: ${y}`);
             for(let anotherPerson of this.#areaArray[y][x].values()) {
                 anotherPerson.infect(person, 1);
-                throw new Error("infect in same place");
             }
 
             // this.getPersonByRadius(person);
