@@ -112,7 +112,6 @@ class Person {
     infect(person, distance) {
         // Formula
         const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
-        distance = ~~distance;
         
         if(infectFormulaResult > person.infection.transmissionRate) {
             this.infection = person.infection;

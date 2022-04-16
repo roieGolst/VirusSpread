@@ -55,7 +55,7 @@ class Area {
                 d = x - person.currentPosition.x;
 
                 if (((d * d) < threshold)) {
-                    let distance = Math.sqrt(((x - person.currentPosition.x) ** 2) + ((y - person.currentPosition.y) ** 2));
+                    let distance = ~~Math.sqrt(((x - person.currentPosition.x) ** 2) + ((y - person.currentPosition.y) ** 2));
                     for(let anotherPerson of this.#areaArray[y][x].values()){
                         anotherPerson.infect(person, distance);
                     }
