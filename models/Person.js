@@ -112,13 +112,12 @@ class Person {
     infect(person, distance) {
         // Formula
         const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        distance = ~~distance;
         
         if(infectFormulaResult > person.infection.transmissionRate) {
             this.infection = person.infection;
             this.deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues));
-            // console.log(this, "Is infected by ", person);
-            console.log(person, "infect");
-            console.log(`person: ${this}`);
+            console.log(person, "infect" , this, "distance is" , distance);
         }
         
     }

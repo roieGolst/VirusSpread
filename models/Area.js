@@ -36,35 +36,33 @@ class Area {
 
     placePerson(person, x, y){
         if(person.infection) {
-            console.log(`infecting ${person.id}, x: ${x}, y: ${y}`);
-            for(let anotherPerson of this.#areaArray[y][x].values()) {
-                anotherPerson.infect(person, 1);
-            }
-
-            // this.getPersonByRadius(person);
+            this.getPersonByRadius(person);
         }
         this.#areaArray[y][x].set(person.id, person);
     }
 
-    // getPersonByRadius(person){
-    //     let x, y, d, yDiff, threshold, radiusSq, radius;
-    //     radius = person.infection.maxInfectRadius;
-    //     radiusSq = (radius * radius) / 4;
-    //     for(y = 0; y < this.dimenssions; y++) {
-    //         yDiff = y - person.currentPosition.y;
-    //         threshold = radiusSq - (yDiff * yDiff);
-    //         for(x = 0; x < this.dimenssions; x++) {
-    //             d = x - person.currentPosition.x;
+    getPersonByRadius(person){
+        let x, d, yDiff, threshold, radiusSq, radius;
 
-    //             if (((d * d) < threshold)) {
-    //                 for(let anotherPerson of this.#areaArray[y][x].values()){
-    //                     anotherPerson.infect(person);
-    //                     throw new Error(`person: ${person.id} is infect by radius`);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+        radius = person.infection.maxInfectRadius + 1;
+        radiusSq = (radius * radius) / 4;
+        
+        for(let y = 0; y < this.dimenssions; y++) {
+            yDiff = y - person.currentPosition.y;
+            threshold = radiusSq - (yDiff * yDiff);
+
+            for(x = 0; x < this.dimenssions; x++) {
+                d = x - person.currentPosition.x;
+
+                if (((d * d) < threshold)) {
+                    let distance = ~~Math.sqrt(((x - person.currentPosition.x) ** 2) + ((y - person.currentPosition.y) ** 2));
+                    for(let anotherPerson of this.#areaArray[y][x].values()){
+                        anotherPerson.infect(person, distance);
+                    }
+                }
+            }
+        }
+    }
 
     getAreaArray() {
         return this.#areaArray;

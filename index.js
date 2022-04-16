@@ -3,9 +3,9 @@ const Area = require("./models/Area");
 const Virus = require("./models/Virus");
 const personUtils = require("./utils/personUtils");
 
-let tlv = new Area(5);
+let tlv = new Area(10);
 
-let corona = new Virus("Corona" , 0.7, 0.2, 1);
+let corona = new Virus("Corona" , 0.7, 0.2, 6);
 
 const pepole = [];
 
