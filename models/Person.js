@@ -110,7 +110,11 @@ class Person {
     }
 
     infect(person, distance) {
-        // Formula
+        if(this.infection == person.infection) {
+            return; // COnsider another more efficiant way to do that
+        }
+
+        // Infection rate formula
         const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         
         if(infectFormulaResult > person.infection.transmissionRate) {
