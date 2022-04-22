@@ -1,11 +1,10 @@
-const uuid = require("uuid");
 const MAX_TICKS_PER_DIRECTION = 10;
 const MAX_MOVMENT_INTERVAL = 10;
 const MAX_HEALTH_POINTS = 10;
 
 class Person {
-    constructor(age, dynamicRate, issues, infection) { 
-        this.id = uuid.v1();
+    constructor(id, age, dynamicRate, issues, infection) { 
+        this.id = id;
         this.age = age / 100;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;

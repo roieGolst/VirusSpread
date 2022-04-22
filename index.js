@@ -9,12 +9,12 @@ let corona = new Virus("Corona" , 0.7, 0.2, 6);
 
 const pepole = [];
 
-let manyak = personUtils.createPerson(corona);
+let manyak = personUtils.createPerson(0, corona);
 manyak.jumpToArea(tlv);
 pepole.push(manyak);
 
 for(let i = 0; i < 4; i++) {
-    const person = personUtils.createPerson();
+    const person = personUtils.createPerson(i + 1);
     person.jumpToArea(tlv);
     pepole.push(person);
 }
