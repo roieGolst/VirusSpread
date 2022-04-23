@@ -3,14 +3,14 @@ const MAX_MOVMENT_INTERVAL = 10;
 const MAX_HEALTH_POINTS = 10;
 
 class Person {
-    constructor(id, age, dynamicRate, issues, infection) { 
+    constructor(id, age, socialRate, dynamicRate, issues, infection) { 
         this.id = id;
         this.age = age / 100;
+        this.socialRate = socialRate;
         this.dynamicRate = dynamicRate;
         this.healthIssues = issues;
         this.healthPoints = MAX_HEALTH_POINTS;
         this.movementInterval = 0;
-        this.infection = infection;
         this.deathFormulaResult = 0;
         this.direction = {
             x: undefined,
@@ -19,6 +19,10 @@ class Person {
         };
 
         this.#resetCurrentPosition();
+
+        if(infection) {
+            this.#infectPerson(infection);
+        }
         // console.log(this);
     }
 
@@ -109,18 +113,28 @@ class Person {
     }
 
     infect(person, distance) {
+        if(this.infection == person.infection) {
+            return;
+        }
+        
         // Formula
-        const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        // const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
+        const infectFormulaResult = (distance + this.socialRate) * Math.random();
         
         if(infectFormulaResult > person.infection.transmissionRate) {
-            this.infection = person.infection;
-            this.deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues));
+            this.#infectPerson(person.infection);
             console.log(person, "infect" , this, "distance is" , distance);
         }
         
     }
 
+    #infectPerson(infection){
+        this.infection = infection;
+        this.deathFormulaResult = (this.infection.deathRate * (this.age + this.healthIssues));
+    }
+
     #killing() {
+
         this.healthPoints -= this.deathFormulaResult;
 
         if(this.healthPoints < 0){

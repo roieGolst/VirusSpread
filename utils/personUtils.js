@@ -10,6 +10,7 @@ module.exports = {
             Math.floor(Math.random() * MAX_AGE),
             Math.random(),
             Math.random(),
+            Math.random(),
             infection
         );
     }   
