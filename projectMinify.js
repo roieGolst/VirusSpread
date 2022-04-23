@@ -218,11 +218,12 @@ class Person {
 }
 
 class Virus {
-    constructor(name, transmissionRate, deathRate, infectRadius) {
+    constructor(name, transmissionRate, deathRate, infectRadius, color) {
         this.name = name;
         this.transmissionRate = 1 - transmissionRate;
         this.deathRate = deathRate;
-        this.maxInfectRadius = infectRadius
+        this.maxInfectRadius = infectRadius;
+        this.color = color;
     }    
 }
 
@@ -243,16 +244,21 @@ const CANVAS_SIZE = 500;
 
 let tlv = new Area(100);
 
-let corona = new Virus("Corona" , 0.9, 0.2, 1);
+let coronaAlpha = new Virus("Corona" , 0.4, 0.1, 2, {r: 255, g: 0, b: 0});
+let coronaOmicron = new Virus("Corona" , 0.7, 0.03, 4, {r: 0, g: 255, b: 0});
 
 const pepole = [];
 
-let manyak = createPerson(0, corona);
+let manyak = createPerson(0, coronaAlpha);
 manyak.jumpToArea(tlv);
 pepole.push(manyak);
 
+let manyak2 = createPerson(0, coronaOmicron);
+manyak2.jumpToArea(tlv);
+pepole.push(manyak2);
+
 for(let i = 0; i < 100; i++) {
-    const person = createPerson(i + 1);
+    const person = createPerson(pepole.length);
     person.jumpToArea(tlv);
     pepole.push(person);
 }
@@ -266,7 +272,7 @@ function setup() {
   } 
   
   function draw() {
-    background(100);
+    background(120);
     scale(5);
 
     for(let k = 0; k < pepole.length; k++) {
@@ -275,7 +281,8 @@ function setup() {
         if(pepole[k].infection) {
             push();
             
-            fill(255, 0, 0);
+            fill(pepole[k].infection.color.r, pepole[k].infection.color.g, pepole[k].infection.color.b);
+
 
             ellipse(
                 pepole[k].currentPosition.x,
