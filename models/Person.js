@@ -118,12 +118,11 @@ class Person {
         }
         
         // Formula
-        // const infectFormulaResult = (1 + (distance * person.infection.transmissionRate)) * (this.dynamicRate + this.age) * Math.random();
         const infectFormulaResult = (distance + this.socialRate) * Math.random();
         
         if(infectFormulaResult > person.infection.transmissionRate) {
             this.#infectPerson(person.infection);
-            console.log(person, "infect" , this, "distance is" , distance);
+            // console.log(person, "infect" , this, "distance is" , distance);
         }
         
     }
@@ -140,8 +139,8 @@ class Person {
         if(this.healthPoints < 0){
             this.currentPosition.area.removePerson(this);
             this.#resetCurrentPosition();
-            console.log(this, "manyak");
-            throw new Error("is dead");
+            // console.log(this, "manyak");
+            // throw new Error("is dead");
         }       
     }
 
