@@ -7,28 +7,25 @@ function setup() {
   } 
 
 function draw() {
-    
     scale(7.8);
 
-    fetchAndDrow();
-
+    fetchAndDraw();
 }
 
 
 
 async function fetchData() {
-    let pepole = await window.pepoleAPI.getPepole()
-    return pepole
+    return  await window.pepoleAPI.getPepole();
 }
 
 
-async function fetchAndDrow() {
+async function fetchAndDraw() {
     let pepole =  await fetchData();
     
-    sketchPepole(pepole)
+    sketchPepole(pepole);
 
     setTimeout(() => {
-        fetchAndDrow()
+        fetchAndDraw();
     }, 16)
 }
 function sketchPepole(pepole) {

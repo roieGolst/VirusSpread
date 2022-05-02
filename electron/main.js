@@ -8,7 +8,7 @@ const personUtils = require("../utils/personUtils");
 
 let tlv = new Area(100);
 
-let coronaAlpha = new Virus("Corona" , 0.5, 0.6, 5, {r: 120, g: 45, b: 78});
+let coronaAlpha = new Virus("Corona" , 0.5, 0.1, 5, {r: 120, g: 45, b: 78});
 let coronaOmicron = new Virus("Corona" , 0.7, 0.2, 6, {r: 15, g: 45, b: 180});
 
 const pepole = [];
@@ -47,7 +47,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 1000,
         height: 1000,
-        
+        icon: path.join(__dirname, "icon.png"),
         webPreferences:{
             contextIsolation: true,
             preload: path.join(__dirname, "preload.js")

@@ -1,6 +1,6 @@
 const MAX_TICKS_PER_DIRECTION = 10;
 const MAX_MOVMENT_INTERVAL = 10;
-const MAX_HEALTH_POINTS = 10;
+const MAX_HEALTH_POINTS = 50;
 
 class Person {
     constructor(id, age, socialRate, dynamicRate, issues, infection) { 
