@@ -2,10 +2,10 @@
   "name": "virusspread",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "electron/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "electron ./"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,6 @@
   },
   "homepage": "https://github.com/theFunkegamer/VirusSpread#readme",
   "dependencies": {
+    "electron": "^18.2.0"
   }
 }

@@ -28,5 +28,5 @@ setInterval(() => {
     for(let k = 0; k < pepole.length; k++) {
         pepole[k].iteration();
     }
-    console.table(tlv.getAreaArray());
+    // console.table(tlv.getAreaArray());
 }, 50);
